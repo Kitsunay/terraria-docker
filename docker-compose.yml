@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  terraria-server: # This will be the container's name.
+    image: terraria-docker:local # Terraria server image.
+    ports:
+      - 7777:7777 # Your terraria server will listen on port 7777
+    environment:
+      port=7777 # Specifies the port to listen on.
+      maxplayers=4 # Sets the max number of players.
+      world=server_world # Load a world and automatically start the server.
+      #password=123456 # Sets the server password.
+      motd=Did you know this server is located in Amsterdam, too? :) # Set the server motto of the day text.
+      autocreate=1 # Creates a world if none is found in the path specified by "world". World size is specified by: 1(small), 2(medium), and 3(large).
+      worldname=server_world # Sets the name of the world when using "autocreate".
+      #seed=AwesomeSeed # Sets the world seed when using "autocreate"
+      difficulty=0 # Sets world difficulty when using "autocreate". Options: 0(normal), 1(expert), 2(master), 3(journey) [Note: Mobile Servers require 1 to be added to the difficulty (e.g. 2 is expert for mobile terraria servers).]
+      #banlist=banlist.txt # Specifies the location of the banlist. Defaults to "banlist.txt" in the working directory.
+      secure=1 # Adds additional cheat protection to the server.
+      noupnp=1 # Automatically forward ports with uPNP.
+      steam=true # Enables Steam support.
+      lobby=friends # Allows only friends to join the server or sets it to private if Steam is enabled. Allowed values are "friends", "private"
+      language=en-US # Sets the server language from its language code. Available codes: en-US, de-DE, it-IT, fr-FR, es-ES, ru-RU, zh-Hans, pt-BR, pl-PL
+      npcstream=60 # Reduces enemy skipping but increases bandwidth usage. The lower the number the less skipping will happen, but more data is sent. 0 is off.
+      priority=1 # Default system priority 0:Realtime, 1:High, 2:AboveNormal, 3:Normal, 4:BelowNormal, 5:Idle
+      # Journey Mode power permissions for every individual power. 0: Locked for everyone, 1: Can only be changed by host, 2: Can be changed by everyone
+      journeypermission_time_setfrozen=2
+      journeypermission_time_setdawn=2
+      journeypermission_time_setnoon=2
+      journeypermission_time_setdusk=2
+      journeypermission_time_setmidnight=2
+      journeypermission_godmode=2
+      journeypermission_wind_setstrength=2
+      journeypermission_rain_setstrength=2
+      journeypermission_time_setspeed=2
+      journeypermission_rain_setfrozen=2
+      journeypermission_wind_setfrozen=2
+      journeypermission_increaseplacementrange=2
+      journeypermission_setdifficulty=2
+      journeypermission_biomespread_setfrozen=2
+      journeypermission_setspawnrate=2
+    volumes:
+      - /home/ubuntu/volumes/terraria/local:/config # Mount your filesystem into the container's /config folder so terraria's data can become persistent
+    tty: true
+    stdin_open: true
+    restart: unless-stopped

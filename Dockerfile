@@ -24,6 +24,7 @@ RUN mkdir /tmp/terraria && \
     if [ ! -f /terraria-server/TerrariaServer ]; then echo "Missing /terraria-server/TerrariaServer"; exit 1; fi
 
 COPY run.sh /terraria-server/run.sh
+RUN chmod +x /terraria-server/run.sh
 
 # Allow for external data
 VOLUME ["/config"]

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-CMD="./TerrariaServer.bin.x86_64
+CMD="./TerrariaServer.bin.x86_64 -autocreate 1"
 
 # Create default config files if they don't exist
 if [ ! -f "/config/serverconfig.txt" ]; then
